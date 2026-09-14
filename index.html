@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MINESTOCK — mine the market</title>
+<meta name="description" content="MINESTOCK — a Minecraft-style world where every ore is a live market. Mine to crash it, buy to pump it — in your browser."/>
+<link rel="icon" href="favicon.png"/>
+<link rel="apple-touch-icon" href="assets/logoMine.png"/>
+<link rel="preload" as="image" href="assets/heroMine.png"/>
+<meta property="og:title" content="MINESTOCK — mine the market"/>
+<meta property="og:description" content="A Minecraft-style world where every ore is a live market you move by mining and trading. No install — runs in your browser."/>
+<meta property="og:image" content="assets/logoMine.png"/>
+<meta property="og:url" content="https://minestock.fun/"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="MINESTOCK — mine the market"/>
+<meta name="twitter:description" content="Mine an ore and its price crashes. Buy it and it pumps. The mine IS the market, in your browser."/>
+<meta name="twitter:image" content="assets/logoMine.png"/>
+<meta name="twitter:site" content="@minestockrobin"/>
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+<div class="scan"></div>
+<div class="ore-rain" aria-hidden="true">
+  <img src="icons/izumrud.png"   style="--x:4%;  --d:14s; --dl:-2s;  --s:26px">
+  <img src="icons/zoloto.png"    style="--x:13%; --d:11s; --dl:-7s;  --s:22px">
+  <img src="icons/lazurit.png"   style="--x:22%; --d:17s; --dl:-11s; --s:20px">
+  <img src="icons/redstone2.png" style="--x:31%; --d:12s; --dl:-4s;  --s:24px">
+  <img src="icons/jelezo.png"    style="--x:40%; --d:15s; --dl:-9s;  --s:24px">
+  <img src="icons/izumrud.png"   style="--x:49%; --d:11.5s; --dl:-6s; --s:18px">
+  <img src="icons/zoloto.png"    style="--x:58%; --d:18s; --dl:-13s; --s:28px">
+  <img src="icons/lazurit.png"   style="--x:67%; --d:13s; --dl:-3s;  --s:24px">
+  <img src="icons/redstone2.png" style="--x:76%; --d:16s; --dl:-10s; --s:20px">
+  <img src="icons/jelezo.png"    style="--x:84%; --d:12.5s; --dl:-5s; --s:22px">
+  <img src="icons/izumrud.png"   style="--x:91%; --d:19s; --dl:-15s; --s:22px">
+  <img src="icons/zoloto.png"    style="--x:97%; --d:13.5s; --dl:-8s; --s:18px">
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="menu" viewBox="0 0 24 24"><path fill="currentColor" d="M3 5h18v3H3zM3 10.5h18v3H3zM3 16h18v3H3z"/></symbol>
+  <symbol id="up" viewBox="0 0 24 24"><path fill="currentColor" d="M11 21V9H8l4-6 4 6h-3v12z"/></symbol>
+  <symbol id="arrow" viewBox="0 0 24 24"><path fill="currentColor" d="M13 4v3H3v10h10v3l8-8z"/></symbol>
+  <symbol id="chart" viewBox="0 0 24 24"><path fill="currentColor" d="M3 3h2v16h16v2H3zM8 14h3v5H8zM13 9h3v10h-3zM18 5h3v14h-3z"/></symbol>
+  <symbol id="x" viewBox="0 0 24 24"><path fill="currentColor" d="M17.5 3h3l-7 8 8.2 10h-6.4l-5-6-5.7 6H1.6l7.5-8.5L1 3h6.5l4.5 5.5L17.5 3z"/></symbol>
+  <symbol id="tg" viewBox="0 0 24 24"><path fill="currentColor" d="M21.9 4.3l-3 14.2c-.2 1-.9 1.2-1.7.8l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.8 8.7-7.9c.4-.3-.1-.5-.6-.2L6.6 12 2 10.5c-1-.3-1-1 .2-1.5l18.4-7.1c.8-.3 1.5.2 1.3 1.4z"/></symbol>
+  <symbol id="pick" viewBox="0 0 24 24"><path fill="currentColor" d="M2 4l3-2 6 5 2-2 9 9-2 2-7-7-1 1 7 7-2 2-9-9 2-2-5-6z"/></symbol>
+</defs></svg>
+
+<nav>
+  <div class="wrap nav-in">
+    <a class="brand" href="#top"><span class="logo"></span>MINESTOCK</a>
+    <div class="nav-l">
+      <a href="#ticker">Ticker</a><a href="#market">Market</a><a href="#about">About</a><a href="#mines">Mines</a><a href="#stats">Stats</a><a href="#roadmap">Levels</a>
+      <a href="#socials" class="nav-ca" title="Contract address">CA <b>0x4484d...228e</b></a>
+      <a href="https://x.com/minestockrobin" target="_blank" rel="noopener" class="btn btn-ghost" style="padding:9px 11px;box-shadow:3px 3px 0 var(--green-dk)" aria-label="X / Twitter"><svg style="width:14px;height:14px"><use href="#x"/></svg></a>
+      <a href="#spawn" class="btn btn-green" style="padding:9px 14px;box-shadow:3px 3px 0 var(--ink)">Play</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Menu"><svg><use href="#menu"/></svg></button>
+  </div>
+  <div class="mobile" id="mobile">
+    <a href="#spawn">Play</a><a href="#ticker">Ticker</a><a href="#market">Market</a><a href="#about">About</a><a href="#mines">Mines</a><a href="#stats">Stats</a><a href="#roadmap">Levels</a><a href="https://x.com/minestockrobin" target="_blank" rel="noopener">X · @minestockrobin</a><a href="#socials">CA: 0x4484d...228e</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="img"></div><div class="veil"></div>
+  <div class="wrap hero-inner">
+    <h1 class="sr-only">MINESTOCK</h1>
+    <div class="hero-card">
+      <span class="kick">INSERT PICKAXE &middot; PLAYER 1</span>
+      <div class="htitle">THE MINE IS THE MARKET</div>
+      <p class="sub">A Minecraft-style world where every ore is a live market. Mine an ore and its price crashes; buy it and it pumps. No install, runs in this tab, your wallet is the save file.</p>
+      <div class="hero-cta">
+        <a href="#spawn" class="btn btn-green">Enter the mine</a>
+        <a href="#ticker" class="btn btn-ghost">Watch the market</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="tape alt"><div class="tape-inner">
+  <span>THE MINE IS THE MARKET</span><span>·</span><span>EVERY ORE = A LIVE MARKET</span><span>·</span><span>MINE TO CRASH · BUY TO PUMP</span><span>·</span><span>500 CREDITS ON SPAWN</span><span>·</span><span>NO INSTALL — BROWSER ONLY</span><span>·</span>
+</div></div>
+
+<section id="spawn"><div class="wrap">
+  <div class="head rv"><span class="ey">▚ PLAYER 1</span><h2>SPAWN IN.</h2>
+    <p>Connect a wallet (or an email) — that's your save file. Claim a nick once, keep your loot forever.</p></div>
+  <div class="pterm frame">
+    <div class="thead"><span><span class="tdot"></span>PLAYER TERMINAL — MINESTOCK.FUN</span><span class="pix">SEASON 0</span></div>
+    <div class="pbody">
+      <div class="row">
+        <button id="connect" class="btn btn-gold">CONNECT WALLET</button>
+        <div id="wallet-badge" style="display:none">
+          <span id="wb-nick"></span>
+          <span id="wb-addr"></span>
+          <button id="disconnect" title="disconnect">✕</button>
+        </div>
+        <button id="play" class="btn btn-green" disabled>LOADING…</button>
+      </div>
+      <div class="row" id="nick-claim" style="display:none">
+        <input id="nc-nick" type="text" maxlength="16" placeholder="choose your nick (3-16, a-z 0-9 _ -)" autocomplete="off">
+        <button id="nc-claim" class="btn btn-green">CLAIM NICK</button>
+      </div>
+      <div id="cashout-row" style="display:none;margin-top:14px;padding-top:14px;border-top:3px solid var(--line)">
+        <div id="cashout-balance" style="font-size:14px;color:var(--muted);margin-bottom:10px;display:none">💰 Balance: <b id="cashout-balance-val" style="color:var(--green)">—</b></div>
+        <div id="cashout-controls" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+          <span style="font-size:13px;color:var(--muted)">💸 Cash out <b id="cashout-label" style="color:var(--gold)">…</b> in ETH to your wallet</span>
+          <button id="cashout-btn" class="btn btn-gold" style="padding:10px 18px">CASH OUT</button>
+        </div>
+        <span id="cashout-status" style="display:block;font-size:12px;color:var(--muted);min-height:16px;margin-top:8px"></span>
+      </div>
+      <p class="alt-login"><a href="#" id="email-toggle">no wallet? login with email code</a></p>
+      <div id="email-auth" style="display:none">
+        <div class="row">
+          <input id="em-email" type="text" placeholder="you@degen.mail" autocomplete="email">
+          <button id="em-send" class="btn btn-ghost">SEND CODE</button>
+        </div>
+        <div class="row" id="em-code-row" style="display:none">
+          <input id="em-code" type="text" maxlength="6" placeholder="6-digit code">
+          <button id="em-verify" class="btn btn-green">VERIFY</button>
+        </div>
+      </div>
+      <p id="status">booting wasm engine…</p>
+      <div class="keysrow"><span><b>WASD</b> MOVE</span><span><b>E</b> INVENTORY</span><span><b>CTRL</b> SPRINT</span><span><b>T</b> CHAT</span><span><b>/tpa</b> FRIENDS</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="ticker" style="background:var(--bg2)"><div class="wrap">
+  <div class="head rv"><span class="ey">▚ THE TICKER</span><h2>ONE MINE. EIGHT STOCKS.</h2>
+    <p>This is <b style="color:var(--green)">live from the game server</b> — every dig, buy and sell in-world moves the ore prices in real time.</p></div>
+  <div class="term frame rv">
+    <div class="thead"><span><span class="tdot"></span>MINESTOCK EXCHANGE — LIVE FEED</span><span id="tclock">--:--:--</span></div>
+    <div class="tprice"><span class="tp up" id="tp">—</span><span class="tchg up" id="tchg"></span></div>
+    <canvas id="tchart" width="340" height="200"></canvas>
+    <div class="tctrls"><div id="tticks"></div><span class="tmood" id="tmood">(⛏^-^) connecting…</span></div>
+  </div>
+  <p class="tnote rv">Candles are built from the in-game exchange history. <b>The chart moves while you read this.</b></p>
+</div></section>
+
+<section id="market"><div class="wrap">
+  <div class="head rv"><span class="ey">▚ LIVE MARKET</span><h2>THE FULL BOARD.</h2>
+    <p class="ph">Every ore is its own live market — mine to dump it, buy to pump it.</p></div>
+  <div class="mkt-frame frame rv" id="mkt-card">
+    <div class="mkt-head"><h3>QUOTES · CREDITS</h3><span id="mkt-meta">connecting…</span></div>
+    <p class="anchored">$COAL · $REDST · $LAPIS · $CU · $IRON · $GOLD · $DMND · $EMRLD — cheap to rare, mine to move</p>
+    <div id="mkt-body"><p id="mkt-offline">market feed offline — start the game server</p></div>
+    <div class="news" id="mkt-news"></div>
+    <div class="rich" id="mkt-rich"></div>
+  </div>
+</div></section>
+
+<section id="about" style="background:var(--bg2)"><div class="wrap about">
+  <div class="pfp frame rv"><video src="assets/criper.mp4" autoplay muted loop playsinline preload="metadata"></video></div>
+  <div class="about-copy rv">
+    <div class="head" style="text-align:left;margin-bottom:0"><span class="ey">▚ ABOUT</span></div>
+    <h2>404: boring mining not found.</h2>
+    <p>MINESTOCK isn't another block game. It's a <span class="hl">stock exchange wearing a Minecraft skin</span> — every ore vein in the world is its own live market. The rarer the ore, the pricier the stock — and every dig moves the price.</p>
+    <p>Dig ore and the supply floods — the price dumps. Buy from the terminal and the demand pumps it. Random shocks shake the whole board every few minutes. The smart ones buy the dip without leaving the cave.</p>
+    <p>No install, no launcher, no team bag. Just a browser tab, a <span class="hl">wallet as your save file,</span> and a market that never sleeps because the miners never do.</p>
+    <a href="#spawn" class="btn btn-gold" style="margin-top:8px">Start digging <svg><use href="#arrow"/></svg></a>
+  </div>
+</div></section>
+
+<section id="mines"><div class="wrap">
+  <div class="head rv"><span class="ey">▚ THE GAMBLE</span><h2>FEELING LUCKY, MINER?</h2>
+    <p>Side quest for degens — the server shuffles, the server pays. No funny business.</p></div>
+  <div class="mgrid">
+    <div class="mines-copy rv">
+      <p>25 blocks of bedrock. <span style="color:var(--coral)">4 hide TNT</span>. One hides a <span class="hl">diamond</span>.</p>
+      <p>Stake your mining credits — find the diamond and <span class="hl">double your bet</span>. Hit the TNT and the mine keeps it.</p>
+      <p>Plays with the <span class="hl">same credits you dig and trade with</span> — connect your wallet up top first.</p>
+      <div class="bet-row" id="bet-row"></div>
+      <button id="dig-start" class="btn btn-green" disabled>DIG FOR 100</button>
+      <div id="dig-stats"></div>
+    </div>
+    <div class="rv">
+      <div class="dig-frame frame">
+        <div id="dig-grid"></div>
+      </div>
+      <div id="dig-msg"></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="stats" style="background:var(--bg2)"><div class="wrap">
+  <div class="head rv"><span class="ey">▚ THE CARTRIDGE</span><h2>SERVER STATS</h2>
+    <p class="ph">The important numbers are already maxed. Token contract is live on Robinhood Chain.</p></div>
+  <div class="specs frame rv">
+    <div class="spec"><span class="k">ORE MARKETS</span><span class="meter" data-on="8"></span><span class="v">8</span></div>
+    <div class="spec"><span class="k">SPAWN CREDITS</span><span class="meter" data-on="5" data-hot="1"></span><span class="v">500</span></div>
+    <div class="spec bad"><span class="k">MONSTERS</span><span class="meter" data-on="0"></span><span class="v">0</span></div>
+    <div class="spec"><span class="k">INSTALL MB</span><span class="meter" data-on="0"></span><span class="v">0</span></div>
+    <div class="spec"><span class="k">FUN</span><span class="meter" data-on="10" data-hot="1"></span><span class="v">9999</span></div>
+    <div class="specfoot">
+      <span>WORLD<b>∞</b></span>
+      <span>ENTRY<b>FREE</b></span>
+      <span>MINERS ON<b id="stat-online">—</b></span>
+      <span>TOKEN<b>SOON™</b></span>
+    </div>
+  </div>
+</div></section>
+
+<section id="roadmap"><div class="wrap">
+  <div class="head rv"><span class="ey">▚ THE LEVELS</span><h2>CONTINUE?</h2>
+    <p class="ph">Arcade rules — clear a level, unlock the next. No dates, only checkpoints.</p></div>
+  <div class="road">
+    <div class="lvl rv"><div class="tag">LVL 1<br>SPAWN</div><div class="body frame"><h4>Power On — CLEARED ✔</h4><ul><li>Browser world live</li><li>Ores are live markets</li><li>Wallet saves + nicks</li><li>Trading terminal</li><li>MINES wagering</li></ul></div></div>
+    <div class="lvl rv"><div class="tag">LVL 2<br>GRIND</div><div class="body frame"><h4>Hi-Score — YOU ARE HERE</h4><ul><li>First 1,000 miners</li><li>Leaderboard seasons</li><li>More market events</li><li>More ways to wager</li></ul></div></div>
+    <div class="lvl rv"><div class="tag">LVL 3<br>MOON</div><div class="body frame"><h4>Final Boss</h4><ul><li>$MINESTOCK token launch</li><li>Play-to-earn: mine → cash out</li><li>Airdrops for early miners</li></ul></div></div>
+  </div>
+</div></section>
+
+<section id="clicker" style="background:var(--bg2)"><div class="wrap">
+  <div class="head rv"><span class="ey">▚ BONUS LEVEL</span><h2>SMASH THE BLOCK.</h2>
+    <p>Free clicks, zero gas. The gold respawns forever — your finger is the pickaxe.</p></div>
+  <div class="clickwrap rv">
+    <div class="clickbox" id="clickbox">
+      <video id="blocklom" src="assets/blocklom.mp4" muted playsinline preload="auto"></video>
+      <canvas id="blockcanvas" aria-hidden="true"></canvas>
+    </div>
+    <div class="clickscore">MINED: <b id="click-count">0</b> GOLD BLOCKS</div>
+  </div>
+</div></section>
+
+<section id="socials"><div class="wrap" style="text-align:center">
+  <div class="head rv"><span class="ey">▚ SOCIALS</span><h2>2-PLAYER MODE</h2>
+    <p>The mine is multiplayer — /tpa to your friends, dump on your enemies.</p></div>
+  <div class="buyrow rv">
+    <a href="#spawn" class="btn btn-green" style="font-size:14px;padding:18px 26px">⛏ Enter the mine</a>
+    <div class="ca"><span>CA</span><code id="ca">0x4484d24a24441c37f60ccdab897bc5aca6e6228e</code><a class="ca-x" href="https://robinhoodchain.blockscout.com/token/0x4484d24a24441c37f60ccdab897bc5aca6e6228e" target="_blank" rel="noopener" onclick="event.stopPropagation()">explorer ↗</a></div>
+  </div>
+  <div class="socials rv">
+    <a href="https://x.com/minestockrobin" class="btn btn-ghost" target="_blank" rel="noopener" style="font-size:13px;padding:16px 24px">Follow on X · @minestockrobin</a>
+  </div>
+  <p class="disc rv"><b>MINESTOCK is a game.</b> In-game credits and ores are game items, not securities or financial instruments. Stock tickers are used as live price feeds for gameplay; nothing here is financial advice. The $MINESTOCK token does not exist yet — anyone posting a CA before it appears on this page is scamming you. NFA · DYOR · watch for falling gravel.</p>
+</div></section>
+
+<footer>
+  <a class="brand" href="#top"><span class="logo" style="width:36px;height:36px"></span>MINESTOCK</a>
+  <p class="copy">Season 0 · server-authoritative economy · WASD move · E inventory · Ctrl sprint · T chat</p>
+  <p class="copy"><a href="https://x.com/minestockrobin" target="_blank" rel="noopener" style="color:var(--green)">@minestockrobin on X</a></p>
+</footer>
+
+<button class="totop" id="toTop" aria-label="Back to top"><svg><use href="#up"/></svg></button>
+
+<script src="js/raf.js"></script>
+<script src="js/chrome.js"></script>
+<script src="js/market.js"></script>
+<script src="js/terminal.js"></script>
+<script src="js/mines.js"></script>
+<script src="js/ca.js"></script>
+</body>
+</html>
